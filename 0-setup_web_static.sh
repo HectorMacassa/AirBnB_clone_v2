@@ -9,7 +9,7 @@ WEB_STATIC_CURRENT="${WEB_STATIC_PATH}/current"
 WEB_STATIC_RELEASES="${WEB_STATIC_PATH}/releases"
 WEB_STATIC_SHARED="${WEB_STATIC_PATH}/shared"
 TEST_RELEASE="${WEB_STATIC_RELEASES}/test"
-USER="your_existing_user"  # Replace with an existing user on your system
+USER="$(id -un)"  # Get the current user
 
 # Update package lists
 sudo apt-get update
@@ -22,8 +22,10 @@ fi
 # Install UFW if not already installed
 if ! dpkg -s ufw >/dev/null 2>&1; then
     sudo apt-get -y install ufw
-    sudo ufw allow 'Nginx HTTP'
 fi
+
+# Allow Nginx HTTP traffic through the firewall
+sudo ufw allow 'Nginx HTTP'
 
 # Create necessary directories
 sudo mkdir -p "${TEST_RELEASE}" "${WEB_STATIC_SHARED}"
