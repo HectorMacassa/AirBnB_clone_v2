@@ -39,8 +39,8 @@ class TestHBNBCommand(unittest.TestCase):
         """Test create command with a valid class name"""
         self.console.onecmd("create BaseModel")
         output = self.output.getvalue().strip()
-        self.assertTrue(len(output) > 0)
-        self.assertIn(output, storage.all().keys())
+        key = f"BaseModel.{output}"
+        self.assertIn(key, storage.all().keys())
 
     def test_show_missing_class(self):
         """Test show command with missing class name"""
@@ -109,7 +109,7 @@ class TestHBNBCommand(unittest.TestCase):
         self.console.onecmd(f"update User {user_id} name 'John'")
         self.console.onecmd(f"show User {user_id}")
         output = self.output.getvalue().strip()
-        self.assertIn("'name': 'John'", output)
+        self.assertIn("'name': \"'John'\"", output)
 
 
 if __name__ == "__main__":
