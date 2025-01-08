@@ -1,4 +1,5 @@
 -- Creates a MySQL server
+-- Database hbnb_test_db
 
 -- Create the database if it doesn't exist
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
